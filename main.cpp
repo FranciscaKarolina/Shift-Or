@@ -3,12 +3,11 @@
 
 #define MAXLEN 10000
 
-int shift_or(char *text, int textlen, char *pattern, int patlen) {//recebe 4 par‚metros: o texto a ser pesquisado (text),
-    //o comprimento do texto (textlen), o padr„o a ser encontrado (pattern) e o comprimento do padr„o (patlen)
-    int m = patlen; //Vari·vel m que È igual ao comprimento do padr„o
-    long pattern_mask[256]; //vetor pattern_mask de long que contÈm 256 elementos
-    long R = ~1; //A vari·vel R È definida como ~1, o que torna uma m·scara de bits que representa o padr„o em branco.
-    // se o comprimento do padr„o for 0 ou maior que 63, a funÁ„o retorna -1.
+int shift_or(char *text, int textlen, char *pattern, int patlen) {//recebe 4 par√¢metros: o texto a ser pesquisado (text),o comprimento do texto (textlen), o padr√£o a ser encontrado (pattern) e o comprimento do padr√£o (patlen)
+    int m = patlen; //Vari√°vel m que √© igual ao comprimento do padr√£o
+    long pattern_mask[256]; //vetor pattern_mask de long que cont√©m 256 elementos
+    long R = ~1; //A vari√°vel R √© definida como ~1, o que torna uma m√°scara de bits que representa o padr√£o em branco.
+    // se o comprimento do padr√£o for 0 ou maior que 63, a fun√ß√£o retorna -1.
 
     if (m == 0)
         return -1;
@@ -20,13 +19,12 @@ int shift_or(char *text, int textlen, char *pattern, int patlen) {//recebe 4 par
     for (int i = 0; i <= 255; ++i)//criar a tabela de deslocamento
         pattern_mask[i] = ~0;
 
-    //se um caractere do texto corresponder ao caractere correspondente no padr„o,
-    //o bit correspondente na m·scara de bits ser· definido como 1.
+    //se um caractere do texto corresponder ao caractere correspondente no padr√£o, o bit correspondente na m√°scara de bits ser√° definido como 1.
     for (int i = 0; i < m; ++i)
-        pattern_mask[pattern[i]] &= ~(1L << i);//comparar o padr„o com o texto
+        pattern_mask[pattern[i]] &= ~(1L << i);//comparar o padr√£o com o texto
 
-    //percorre o texto e compara o padr„o com cada subcadeia de caracteres do texto.
-    for (int i = 0; i < textlen; ++i) { //encontrar todas as ocorrÍncias do padr„o no texto.
+    //percorre o texto e compara o padr√£o com cada subcadeia de caracteres do texto.
+    for (int i = 0; i < textlen; ++i) { //encontrar todas as ocorr√™ncias do padr√£o no texto.
         R |= pattern_mask[text[i]];
         R <<= 1;
         if ((R & (1L << m)) == 0)
@@ -36,8 +34,7 @@ int shift_or(char *text, int textlen, char *pattern, int patlen) {//recebe 4 par
     return -1;
 }
 
-int main() { //lÍ a sequÍncia de DNA e padr„o de pesquisa da entrada do usu·rio e
-    //chama a funÁ„o shift_or para buscar o padr„o na sequÍncia.
+int main() { //l√™ a sequ√™ncia de DNA e padr√£o de pesquisa da entrada do usu√°rio e chama a fun√ß√£o shift_or para buscar o padr√£o na sequ√™ncia.
     char dna[MAXLEN], pattern[MAXLEN];
     int dnalen, patlen, pos;
 
